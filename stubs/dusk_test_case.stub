@@ -1,0 +1,45 @@
+<?php
+
+namespace Tests\Browser\Tests\{{RTM_FOLDER}}\{{MODULE_NAME}};
+
+use App\Models\User;
+use Laravel\Dusk\Browser;
+use App\Services\DevOps\RTMService;
+
+/**
+ *
+ *  @author {{AUTHOR_NAME}}
+ *  @date {{CURRENT_DATE}}
+ *  @milestone {{MILESTONE_NAME}} (ID: {{MILESTONE_ID}})
+ *  @task_number {{TASK_ID}}
+ *
+ *  [START SUMMARY]
+ *  {{TEST_CASE_DESCRIPTION}}
+ *  [END SUMMARY]
+ */
+
+$group_name = '{{GROUP_NAME}}';
+beforeAll(function () {
+    RTMService::setScreenshotPath('tests/Browser/screenshots/{{RTM_NAME}}/{{MODULE_NAME}}');
+    RTMService::setPrefix('{{MODULE_NAME}}');
+});
+
+beforeEach(function () {
+    $this->user = User::factory()->create();
+    $this->folder = '{{RTM_FOLDER}}-{{MODULE_NAME}}'; // this should not be changed
+});
+
+describe('{{MODULE_NAME}}',function() use ($group_name) {
+    test('TC_01: ', function () {
+        $this->browse(function (Browser $browser) {
+
+            $browser
+                ->loginAs($this->user)
+                ->visit('/dashboard')
+                ->snap('ENTER THE TEST STEP CONTEXT HERE');
+
+            // ENTER TESTING STEPS HERE
+        });
+    })->group('{{MODULE_NAME}}');
+});
+
