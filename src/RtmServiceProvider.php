@@ -37,21 +37,20 @@ class RtmServiceProvider extends ServiceProvider
 
             // Publishing assets.
             /*$this->publishes([
-                __DIR__.'/../resources/assets' => public_path('vendor/rtm'),
-            ], 'assets');*/
+                 __DIR__.'/../resources/assets' => public_path('vendor/rtm'),
+             ], 'assets');*/
 
             // Publishing the translation files.
             /*$this->publishes([
                 __DIR__.'/../resources/lang' => resource_path('lang/vendor/rtm'),
             ], 'lang');*/
 
-
-
             $this->commands(ExportRTMToCsv::class);
             $this->commands(ExportRTMToMarkdown::class);
             $this->commands(GenerateGifForTestCases::class);
             $this->commands(GenerateDuskTestCase::class);
             $this->commands(ExportRTMToZip::class);
+            
         }
 
     }

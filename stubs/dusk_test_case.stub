@@ -3,7 +3,7 @@
 namespace Tests\Browser\Tests\{{RTM_FOLDER}}\{{MODULE_NAME}};
 
 use App\Models\User;
-use Laravel\Dusk\Browser;
+use Icrewsystems\RTM\RtmTestBrowser as Browser;
 use App\Services\DevOps\RTMService;
 
 /**

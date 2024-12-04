@@ -60,8 +60,7 @@ Add the package to your Laravel application as a path repository:
     composer dump-autoload
  ```
 
----
-Here’s the finalized documentation combining all commands and a clear workflow:
+4. Copy the ``RTMTestBrowser`` from the src folder and
 
 ---
 
@@ -234,6 +233,7 @@ The package includes a `config/rtm.php` file for customizable settings.
            ->snap('TC_01_Login_Page_Render', 'RTM_01/AuthenticationModule')
            ->assertSee('Email');
    ```
+
 
 3. **Generate GIFs from Screenshots**:
    ```bash
