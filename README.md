@@ -1,19 +1,60 @@
-# Very short description of the package
+# RTM Pakcage
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/icrewsystems/rtm.svg?style=flat-square)](https://packagist.org/packages/icrewsystems/rtm)
-[![Total Downloads](https://img.shields.io/packagist/dt/icrewsystems/rtm.svg?style=flat-square)](https://packagist.org/packages/icrewsystems/rtm)
-![GitHub Actions](https://github.com/icrewsystems/rtm/actions/workflows/main.yml/badge.svg)
 
-This is where your description should go. Try and limit it to a paragraph or two, and maybe throw in a mention of what PSRs you support to avoid any confusion with users and contributors.
+The RTM Package is a Laravel package designed to streamline RTM (Requirement Traceability Matrix) management for the projects that we are building. It includes a set of  artisan commands that helps in seamless export and organization of test artifacts like screenshots and GIFs into timestamped ZIP archives.
+
+
 
 ## Installation
 
-You can install the package via composer:
+### Step 1:Download and Extract the Package 
 
-```bash
-composer require icrewsystems/rtm
+Download the package as a zip file and extract it into your Laravel project’s ``packages/`` directory under the name rtmThe resulting folder structure should look like this:
+
+```
+    laravel-project/
+        ├── app/
+        ├── config/
+        ├── packages/
+        │   └── rtm/
+        │       ├── src/
+        │       │   ├── Commands/
+        │       │   ├── Stubs/
+        │       │   └── Config/
+        │       ├── composer.json
+        ├── ...
 ```
 
+### Step 2: Update composer.json
+Add the package to your Laravel application as a path repository:
+
+ 1.Open your project’s composer.json file and add the following: 
+ ```
+    "repositories": {
+        "icrewsystems/rtm": {
+            "type": "path",
+            "url": "packages/rtm",
+            "options": {
+                "symlink": true
+            }
+        }
+    },
+    "require": {
+        "icrewsystems/rtm": "@dev",
+        "ext-imagick": "*",
+        "ext-zip": "*"
+    }
+ ``` 
+ 2. Run Composer to install the package:
+ ``` 
+   composer require icrewsystems/rtm
+ ```
+
+ 3. Update Composer’s autoloader:
+ ```
+    composer dump-autoload
+ ```
+    
 ## Usage
 
 ```php

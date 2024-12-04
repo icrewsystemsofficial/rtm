@@ -9,7 +9,7 @@ use ZipArchive;
 //TODO add icrew TM in all commands and scripts with proper documentation, such as author , verison , created at
 // private zip folder repo and setup steps
 
-class ExportRtmToZip extends Command
+class ExportRTMToZip extends Command
 {
     /**
      * The name and signature of the console command.

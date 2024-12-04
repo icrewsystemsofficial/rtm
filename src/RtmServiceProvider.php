@@ -2,9 +2,10 @@
 
 namespace Icrewsystems\Rtm;
 
-use App\Console\Commands\ExportRtmToMarkdown;
-use App\Console\Commands\ExportRtmToZip;
+
 use Icrewsystems\Rtm\Commands\ExportRTMToCsv;
+use Icrewsystems\Rtm\Commands\ExportRTMToMarkdown;
+use IcrewSystems\Rtm\Commands\ExportRTMToZip;
 use Icrewsystems\Rtm\Commands\GenerateDuskTestCase;
 use Icrewsystems\Rtm\Commands\GenerateGifForTestCases;
 use Illuminate\Support\ServiceProvider;
@@ -45,20 +46,12 @@ class RtmServiceProvider extends ServiceProvider
             ], 'lang');*/
 
 
-            // Registering package commands.
-//             $this->commands([
-//                 GenerateDuskTestCase::class,
-//                 GenerateGifForTestCases::class,
-//                 ExportRtmToZip::class,
-//                 ExportRtmToMarkdown::class,
-//                 ExportRTMToCsv::class,
-//             ]);
 
             $this->commands(ExportRTMToCsv::class);
-            $this->commands(ExportRtmToMarkdown::class);
+            $this->commands(ExportRTMToMarkdown::class);
             $this->commands(GenerateGifForTestCases::class);
             $this->commands(GenerateDuskTestCase::class);
-            $this->commands(ExportRtmToZip::class);
+            $this->commands(ExportRTMToZip::class);
         }
 
     }
