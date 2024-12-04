@@ -61,15 +61,64 @@ Add the package to your Laravel application as a path repository:
  ```
 
 ---
+Here’s the finalized documentation combining all commands and a clear workflow:
+
+---
 
 ## Usage
 
 ### Artisan Commands
 
-This package provides several Artisan commands to streamline RTM management in the projects. Below is a list of
-available commands and their purpose:
+This package provides several Artisan commands to streamline RTM management in projects. Below is a list of available
+commands and their purpose:
 
-#### 1. **Export RTM Files as a ZIP Archive**
+---
+
+#### 1. **Generate a Dusk Test Case**
+
+**Command**:
+
+```bash
+php artisan rtm:generate-dusk-test-case
+```
+
+**Description**:  
+Generates a new Dusk test case file using a custom stub. This command is tailored for the RTM (Requirement Traceability
+Matrix) system used by iCrewSystems. It includes metadata like author name, milestone details, and task ID.
+
+**How It Works**:
+
+- Prompts for RTM name (e.g., `RTM_01`), module name (e.g., `AuthenticationModule`), milestone details, task ID, and a
+  description of the test case.
+- Retrieves the author name from Git configuration (`git config --get user.name`).
+- Generates a test case file using a stub at `stubs/dusk_test_case.stub`.
+- Ensures the correct directory structure under `tests/Browser/Tests`.
+
+**Example Workflow**:
+
+1. Run the command:
+   ```bash
+   php artisan rtm:generate-dusk-test-case
+   ```
+
+2. Provide the required inputs:
+   ```
+   Enter the RTM name (e.g., RTM_01): RTM_01
+   Enter the module name: AuthenticationModule
+   Enter milestone name: User Login Milestone
+   Enter milestone ID: MILESTONE_01
+   Enter task ID: TASK-123
+   Enter a brief description of the test case: Test login functionality
+   ```
+
+3. Generated output file:
+   ```
+   tests/Browser/Tests/RTM_01/AuthenticationModule/AuthenticationModuleDuskTest.php
+   ```
+
+---
+
+#### 2. **Export RTM Files as a ZIP Archive**
 
 **Command**:
 
@@ -78,8 +127,8 @@ php artisan app:export-rtm-to-zip
 ```
 
 **Description**:  
-This command packages all RTM-related files (screenshots, GIFs) into a timestamped ZIP archive. The generated ZIP file
-is stored in the `tests/Browser/RTM_EXPORTS` directory.
+Packages all RTM-related files (screenshots, GIFs) into a timestamped ZIP archive. The generated ZIP file is stored in
+the `tests/Browser/RTM_EXPORTS` directory.
 
 **How It Works**:
 
@@ -94,7 +143,9 @@ ZIP file created successfully!
 Download Path: tests/Browser/RTM_EXPORTS/RTM_exports_20241118124500.zip
 ```
 
-#### 2. **Generate Test Artifacts Documentation**
+---
+
+#### 3. **Generate Test Artifacts Documentation**
 
 **Command**:
 
@@ -103,27 +154,28 @@ php artisan app:generate-rtm-docs
 ```
 
 **Description**:  
-This command parses test case files to generate documentation for RTM purposes. It scans the `tests/Browser/Tests`
-folder for test cases, extracts descriptions and steps (e.g., screenshots and snap methods), and outputs them into a
-structured file or CSV format.
+Parses test case files to generate RTM documentation. It scans the `tests/Browser/Tests` folder for test cases, extracts
+descriptions and steps (e.g., `->snap()` calls), and outputs them into a structured file or CSV format.
 
 **How It Works**:
 
-- Reads all `.php` test case files in the `tests/Browser/Tests` directory.
+- Reads `.php` test case files in the `tests/Browser/Tests` directory.
 - Extracts:
     - Test case descriptions (e.g., `it('TC_01: can render the login page')`).
     - Steps performed (e.g., calls to `->snap()`).
-- Outputs structured data for RTM documentation.
+- Outputs structured data in CSV format.
 
 **Example Output**:
 
-- `test_case_descriptions.csv` with the following structure:
-  | Test Case ID | Test Case Description | Steps |
-  |--------------|---------------------------------------|--------------------------------------------|
-  | TC_01 | Can render the login page | Visit `/login`, Snap login page rendered. |
-  | TC_02 | Does not allow login with incorrect password | Enter incorrect password, Snap error page.|
+`test_case_descriptions.csv` with the following structure:
+| Test Case ID | Test Case Description | Steps |
+|--------------|------------------------|--------------------------------------------|
+| TC_01 | Can render the login page | Visit `/login`, Snap login page rendered. |
+| TC_02 | Does not allow login with incorrect password | Enter incorrect password, Snap error page.|
 
-#### 3. **Generate GIFs from Screenshots**
+---
+
+#### 4. **Generate GIFs from Screenshots**
 
 **Command**:
 
@@ -132,8 +184,7 @@ php artisan app:generate-gif-for-test-cases
 ```
 
 **Description**:  
-This command creates GIF animations from sequential screenshots for each test case. It allows you to visually represent
-the test flow step-by-step.
+Creates GIF animations from sequential screenshots for each test case, visually representing the test flow step-by-step.
 
 **How It Works**:
 
@@ -171,33 +222,35 @@ The package includes a `config/rtm.php` file for customizable settings.
 
 ### Example Workflow
 
-1. Capture screenshots during your Dusk tests using the `->snap()` method:
+1. **Generate a Dusk Test Case**:
+   ```bash
+   php artisan rtm:generate-dusk-test-case
+   ```
+
+2. **Capture Screenshots During Tests**:
+   Use the `->snap()` method in your test cases:
    ```php
    $browser->visit('/login')
            ->snap('TC_01_Login_Page_Render', 'RTM_01/AuthenticationModule')
            ->assertSee('Email');
    ```
 
-2. Run the **Generate GIFs** command:
+3. **Generate GIFs from Screenshots**:
    ```bash
    php artisan app:generate-gif-for-test-cases
    ```
 
-3. Run the **Export RTM Files** command:
+4. **Export RTM Files**:
    ```bash
    php artisan app:export-rtm-to-zip
    ```
 
-4. Use the **Generate RTM Docs** command to extract all test case details into a CSV file:
+5. **Generate RTM Documentation**:
    ```bash
    php artisan app:generate-rtm-docs
    ```
 
-5. Share the generated ZIP archive and documentation with your team or clients.
+6. Share the ZIP archive and generated documentation with your team or clients.
 
----
-
-This expanded **Usage** section provides a comprehensive guide to all commands and their workflows, ensuring users
-understand their purpose and how to use them effectively. Let me know if you need further additions or refinements!
 
 
